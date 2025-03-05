@@ -112,6 +112,7 @@ Readme for this version: [2.6.5 readme](https://github.com/FaridSafi/react-nativ
 ### Install dependencies
 
 Yarn:
+
 ```bash
 yarn add react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
 ```
@@ -123,6 +124,7 @@ npm install --save react-native-gifted-chat react-native-reanimated react-native
 ```
 
 Expo
+
 ```bash
 npx expo install react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
 ```
@@ -138,6 +140,7 @@ npx pod-install
 Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
 
 ## Testing
+
 `TEST_ID` is exported as constants that can be used in your testing library of choice
 
 Gifted Chat uses `onLayout` to determine the height of the chat container. To trigger `onLayout` during your tests, you can run the following bits of code.
@@ -146,15 +149,15 @@ Gifted Chat uses `onLayout` to determine the height of the chat container. To tr
 const WIDTH = 200; // or any number
 const HEIGHT = 2000; // or any number
 
-const loadingWrapper = getByTestId(TEST_ID.LOADING_WRAPPER)
-fireEvent(loadingWrapper, 'layout', {
+const loadingWrapper = getByTestId(TEST_ID.LOADING_WRAPPER);
+fireEvent(loadingWrapper, "layout", {
   nativeEvent: {
     layout: {
       width: WIDTH,
       height: HEIGHT,
     },
   },
-})
+});
 ```
 
 ## You have a question?
@@ -167,42 +170,42 @@ fireEvent(loadingWrapper, 'layout', {
 ## Example
 
 ```jsx
-import React, { useState, useCallback, useEffect } from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
+import React, { useState, useCallback, useEffect } from "react";
+import { GiftedChat } from "react-native-gifted-chat";
 
 export function Example() {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     setMessages([
       {
         _id: 1,
-        text: 'Hello developer',
+        text: "Hello developer",
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any",
         },
       },
-    ])
-  }, [])
+    ]);
+  }, []);
 
   const onSend = useCallback((messages = []) => {
-    setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, messages),
-    )
-  }, [])
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
+    );
+  }, []);
 
   return (
     <GiftedChat
       messages={messages}
-      onSend={messages => onSend(messages)}
+      onSend={(messages) => onSend(messages)}
       user={{
         _id: 1,
       }}
     />
-  )
+  );
 }
 ```
 
@@ -220,18 +223,18 @@ See the files in [`example/example-slack-message`](example/example-slack-message
 
 ```ts
 export interface IMessage {
-  _id: string | number
-  text: string
-  createdAt: Date | number
-  user: User
-  image?: string
-  video?: string
-  audio?: string
-  system?: boolean
-  sent?: boolean
-  received?: boolean
-  pending?: boolean
-  quickReplies?: QuickReplies
+  _id: string | number;
+  text: string;
+  createdAt: Date | number;
+  user: User;
+  image?: string;
+  video?: string;
+  audio?: string;
+  system?: boolean;
+  sent?: boolean;
+  received?: boolean;
+  pending?: boolean;
+  quickReplies?: QuickReplies;
 }
 ```
 
@@ -276,15 +279,15 @@ See PR [#1211](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)
 
 ```ts
 interface Reply {
-  title: string
-  value: string
-  messageId?: number | string
+  title: string;
+  value: string;
+  messageId?: number | string;
 }
 
 interface QuickReplies {
-  type: 'radio' | 'checkbox'
-  values: Reply[]
-  keepIt?: boolean
+  type: "radio" | "checkbox";
+  values: Reply[];
+  keepIt?: boolean;
 }
 ```
 
@@ -346,7 +349,7 @@ interface QuickReplies {
 
 ## Props
 
-- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
+- **`messageContainerRef`** _(FlashList ref)_ - Ref to the flashlist
 - **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 - **`messages`** _(Array)_ - Messages to display
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
@@ -421,7 +424,7 @@ interface QuickReplies {
  />
 ```
 
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
+- **`extraData`** _(Object)_ - Extra props for re-rendering FlashList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 
@@ -448,7 +451,7 @@ simply implement `onInputTextChanged` to receive typing events and reset events 
 ```js
 <GiftedChat
   text={customText}
-  onInputTextChanged={text => this.setCustomText(text)}
+  onInputTextChanged={(text) => this.setCustomText(text)}
   /* ... */
 />
 ```
@@ -513,23 +516,24 @@ If you use React Navigation, additional handling may be required to account for 
 module.exports = function override(config, env) {
   config.module.rules.push({
     test: /\.js$/,
-    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
+    exclude:
+      /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
     use: {
-      loader: 'babel-loader',
+      loader: "babel-loader",
       options: {
         babelrc: false,
         configFile: false,
         presets: [
-          ['@babel/preset-env', { useBuiltIns: 'usage' }],
-          '@babel/preset-react',
+          ["@babel/preset-env", { useBuiltIns: "usage" }],
+          "@babel/preset-react",
         ],
-        plugins: ['@babel/plugin-proposal-class-properties'],
+        plugins: ["@babel/plugin-proposal-class-properties"],
       },
     },
-  })
+  });
 
-  return config
-}
+  return config;
+};
 ```
 
 > You will find an example and a **web demo** here: [xcarpentier/gifted-chat-web-demo](https://github.com/xcarpentier/gifted-chat-web-demo)
