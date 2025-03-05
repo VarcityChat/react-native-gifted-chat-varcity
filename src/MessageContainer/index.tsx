@@ -5,8 +5,7 @@ import {
   Text,
   Platform,
   LayoutChangeEvent,
-  ListRenderItemInfo,
-  FlatList,
+  // ListRenderItemInfo,
   CellRendererProps,
 } from "react-native";
 import Animated, {
@@ -30,7 +29,7 @@ import { warning } from "../logging";
 import stylesCommon from "../styles";
 import styles from "./styles";
 import { isSameDay } from "../utils";
-import { FlashList } from "@shopify/flash-list";
+import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
 
 export * from "./types";
 
